@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "name": "Keyboard",
+      "createdAt": "2025-03-04T00:00:00Z",
+      "updatedAt": "2025-03-04T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Mouse",
+      "createdAt": "2025-03-04T00:00:00Z",
+      "updatedAt": "2025-03-04T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Headset",
+      "createdAt": "2025-03-04T00:00:00Z",
+      "updatedAt": "2025-03-04T00:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Monitor",
+      "createdAt": "2025-03-04T00:00:00Z",
+      "updatedAt": "2025-03-04T00:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Chair",
+      "createdAt": "2025-03-04T00:00:00Z",
+      "updatedAt": "2025-03-04T00:00:00Z"
+    }
+  ]
+  
