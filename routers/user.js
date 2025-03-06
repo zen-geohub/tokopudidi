@@ -4,8 +4,8 @@ const Products = require('../controllers/products')
 const Cart = require('../controllers/cart')
 
 // product
-router.get('/products', Products.readProducts)
-router.get('/products/:id', Products.detailProduct)
+router.get('/products', Products.readProductsByUser)
+router.get('/products/:id', Products.detailProductByUser)
 
 // cart
 router.get('/cart', Cart.readCart)

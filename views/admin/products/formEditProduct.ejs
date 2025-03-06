@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../_navbar') %>
+
+    <div class="container">
+        <h2 style="display: flex; justify-content: center; margin-bottom: 10px;">Add Product</h2>
+
+        <form action="/admin/products/edit/<%= product.id %>" method="post">
+            <label>Product</label>
+            <div style="margin: 10px 0px;">
+                <input name="name" value="<%= product.name %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <label>Description</label>
+            <div style="margin: 10px 0px;">
+                <input name="description" value="<%= product.description %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <label>Price</label>
+            <div style="margin: 10px 0px;">
+                <input name="price" value="<%= product.price %>" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <label>Image</label>
+            <div style="margin: 10px 0px;">
+                <input name="image" value="<%= product.image %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <label>Stock</label>
+            <div style="margin: 10px 0px;">
+                <input name="stock" value="<%= product.stock %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <label>Category</label>
+            <select style="margin: 10px 0px;" name="CategoryId" class="form-select" aria-label="Default select example">
+                <% categories.forEach((el) => { %>
+                    <% if (el.id === product.CategoryId) { %>
+                        <option value="<%= el.id %>" selected><%= el.name %></option>
+                    <% } else { %>
+                        <option value="<%= el.id %>"><%= el.name %></option>
+                    <% } %>
+                <% }) %>
+              </select>
+            <div>
+                <button type="submit" value="submit" class="btn btn-primary">Update Product</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include('../_script') %>
+</body>
+</html>
