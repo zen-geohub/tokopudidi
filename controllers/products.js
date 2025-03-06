@@ -18,7 +18,7 @@ class Products {
             let products = await Product.findAll(option)
             res.render("admin/products/listProduct", { products, rupiah, deleted })
         } catch (err) {
-            console.log(err)
+
             res.send(err)
         }
     }
