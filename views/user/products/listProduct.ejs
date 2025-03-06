@@ -26,27 +26,59 @@
 </head>
 
 <body>
-    <%- include('../_navbar') %>
-
-        <div class="container my-4">
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                <% products.forEach((el) => { %>
-                    <div class="col">
-                        <a href="/user/products/<%= el.id %>" class="text-decoration-none text-dark">
-                            <div class="card">
-                                <img src="<%= el.image %>" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= el.name %></h5>
-                                    <p class="card-text"><%= rupiah(el.price) %></p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                <% }) %>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Toko Pudidi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/user/products">Home</a>
+                    <a class="nav-link" href="/user/cart">Cart</a>
+                    <a class="nav-link" href="/user/orders">History</a>
+                    <a class="nav-link" href="/user/profile">Profile</a>
+                </div>
             </div>
-        </div>
+            <form class="d-flex align-items-center gap-2" role="search">
+                <select class="form-select" name="filter">
+                    <option value="">Category</option>
+                    <% categories.forEach((el) => { %>
+                        <option value="<%= el.id %>"><%= el.name %></option>
+                    <% }) %>
+                </select>
 
-        <%- include('../_script') %>
+                <input name="name" class="form-control" type="search" placeholder="Search" aria-label="Search">
+
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <% products.forEach((el)=> { %>
+                <div class="col">
+                    <a href="/user/products/<%= el.id %>" class="text-decoration-none text-dark">
+                        <div class="card">
+                            <img src="<%= el.image %>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= el.name %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= rupiah(el.price) %>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <%- include('../_script') %>
 </body>
 
 </html>
