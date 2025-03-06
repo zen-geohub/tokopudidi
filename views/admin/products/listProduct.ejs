@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .col {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        a:hover .card {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../_navbar') %>
+
+        <div class="container my-4">
+            <% if (deleted) { %>
+                <h5 style="color: red; display: flex; justify-content: center;">product "<%= deleted %>" deleted</h5> 
+            <% } %>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <% products.forEach((el) => { %>
+                    <div class="col">
+                        <a href="/admin/products/<%= el.id %>" class="text-decoration-none text-dark">
+                            <div class="card">
+                                <img src="<%= el.image %>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= el.name %></h5>
+                                    <p class="card-text"><%= rupiah(el.price) %></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <%- include('../_script') %>
+</body>
+
+</html>

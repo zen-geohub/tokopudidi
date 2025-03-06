@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Category.hasMany(models.Product, { foreignKey: "CategoryId" })
+    }
+
+    get formatDate() {
+      let date = new Date(this.updatedAt)
+      return date.toISOString().split('T')[0];
     }
   }
   Category.init({

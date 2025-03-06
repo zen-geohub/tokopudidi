@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .col {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        a:hover .card {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../_navbar') %>
+
+        <div class="container my-4">
+            <div class="card mb-3 h-75">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="<%= data.image %>" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body d-flex flex-column justify-content-between h-100">
+                        <div>
+                            <h3 class="card-title"><%= data.name %></h3>
+                            <p class="card-text"><%= data.description %></p>
+                            <h3 class="card-title"><%= rupiah(data.price) %></h3>
+                            <p class="card-text"><b>Stock: </b><%= data.stock %></p>
+                        </div>
+                        <div>
+                            <div style="display: flex; margin-bottom: 20px; gap: 10px;">
+                                <a href="/admin/products/delete/<%= data.id %>" type="button" class="btn btn-primary">buy</a>
+                                <a href="/user/cart/add/<%= data.id %>" type="button" class="btn btn-success">
+                                    Add to Cart
+                                </a>
+                            </div>
+                            <p class="card-text"><small class="text-body-secondary"><%= timeSince(data.updatedAt) %></small></p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <%- include('../_script') %>
+</body>
+
+</html>

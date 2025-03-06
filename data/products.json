@@ -5,7 +5,7 @@
       "description": "Keyboard gaming dengan switch mekanikal dan lampu RGB.",
       "price": 750000,
       "stock": 10,
-      "image": "keyboard_rgb.jpg",
+      "image": "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/97/MTA-143317168/brd-44261_fype-gaming-keyboard-rgb-cable-light-k500-mechanical-hand_full08-4a383a00.jpg",
       "CategoryId": 1,
       "createdAt": "2025-03-04T00:00:00Z",
       "updatedAt": "2025-03-04T00:00:00Z"
@@ -16,7 +16,7 @@
       "description": "Mouse gaming wireless dengan DPI adjustable.",
       "price": 500000,
       "stock": 15,
-      "image": "mouse_wireless.jpg",
+      "image": "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//100/MTA-50390846/imice_wireless_gaming_mouse_rgb_rechargeable_3200_dpi_recharge_wireles_mause_full01_ua0ujofp.jpg",
       "CategoryId": 2,
       "createdAt": "2025-03-04T00:00:00Z",
       "updatedAt": "2025-03-04T00:00:00Z"
@@ -27,7 +27,7 @@
       "description": "Headset gaming dengan surround sound dan noise canceling.",
       "price": 650000,
       "stock": 8,
-      "image": "headset_surround.jpg",
+      "image": "https://upload.jaknot.com/2024/09/images/products/b029a8/original/lenovo-lecoo-gaming-headphone-headset-surround-sound-colorful-with-mic-ht403.jpeg",
       "CategoryId": 3,
       "createdAt": "2025-03-04T00:00:00Z",
       "updatedAt": "2025-03-04T00:00:00Z"
@@ -38,7 +38,7 @@
       "description": "Monitor gaming dengan refresh rate 144Hz dan resolusi Full HD.",
       "price": 3000000,
       "stock": 5,
-      "image": "monitor_144hz.jpg",
+      "image": "https://images.tokopedia.net/img/cache/700/VqbcmM/2021/12/6/c9f641f8-e8b2-44cc-88b4-e725d3a4a9ec.png",
       "CategoryId": 4,
       "createdAt": "2025-03-04T00:00:00Z",
       "updatedAt": "2025-03-04T00:00:00Z"
@@ -49,7 +49,7 @@
       "description": "Kursi gaming ergonomis dengan sandaran adjustable.",
       "price": 2000000,
       "stock": 7,
-      "image": "gaming_chair.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTRnTF_zffyfjKkc2ylL_KiZyVGTYtAD-t4g&s",
       "CategoryId": 5,
       "createdAt": "2025-03-04T00:00:00Z",
       "updatedAt": "2025-03-04T00:00:00Z"

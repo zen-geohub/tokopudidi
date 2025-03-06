@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('../_navbar') %>
+
+        <div class="container">
+            <div style="margin: 20px 0px;">
+                <a href="/admin/categories/add" type="button" class="btn btn-primary">Add Category</a>
+            </div>
+            <% if (deleted) { %>
+                <div style="margin: 20px 0px; display: flex; justify-content: center;">
+                    <p style="color: red;">category "<b><%= deleted %></b>" deleted</p>
+                </div>
+            <% } %>
+            <% if (updated) { %>
+                <div style="margin: 20px 0px; display: flex; justify-content: center;">
+                    <p style="color: green;">category "<b><%= updated %></b>" updated</p>
+                </div>
+            <% } %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Last Updated</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach((el, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= el.name %></td>
+                            <td><%= el.formatDate %></td>
+                            <td>
+                                <a href="/admin/categories/edit/<%= el.id %>" type="button" class="btn btn-success">Edit</a>
+                                <a href="/admin/categories/delete/<%= el.id %>" type="button" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <%- include('../_script') %>
+</body>
+
+</html>

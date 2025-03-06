@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../_navbar') %>
+
+    <div class="container">
+        <form action="/admin/categories/edit/<%= data.id %>" method="post">
+            <h2 style="display: flex; justify-content: center;">Add Category</h2>
+            <label>Category</label>
+            <div style="margin: 10px 0px;">
+                <input name="name" value="<%= data.name %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div style="margin: 10px 0px;">
+                <button type="submit" value="submit" class="btn btn-primary">Add Category</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include('../_script') %>
+</body>
+</html>

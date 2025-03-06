@@ -3,7 +3,7 @@
 class Login {
     static async loginPage(req, res) {
         try{
-
+            res.send('ini halaman login')
         }catch(err) {
             
         }
