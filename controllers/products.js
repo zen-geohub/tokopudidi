@@ -3,7 +3,7 @@
 class Products {
     static async readProducts(req, res) {
         try{
-
+            res.send('hellow world')
         }catch(err) {
             
         }
