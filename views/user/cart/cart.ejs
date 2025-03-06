@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <style>
+    .col {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    .card {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    a:hover .card {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('../_navbar') %>
+
+    <% if (data.length===0) { %>
+      <div style="height: 100dvh; width: 100dvw; display: flex; justify-content: center; align-items: center;">
+        <h1 style="text-align: center;"><span style="font-size: 8rem;">&#128722;</span><br />Cart is Empty</h1>
+      </div>
+      <% } else { %>
+        <div class="container my-4">
+          <div class="row row-cols-1 row-cols-md-4 g-4">
+            <% data.forEach((el)=> { %>
+              <div class="col">
+                <a href="/user/products/" class="text-decoration-none text-dark">
+                  <div class="card">
+                    <img src="<%= el['Product']['image'] %>" class="card-img-top">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= el['Product']['name'] %>
+                      </h5>
+                      <div>
+                        <p>
+                          Quantity:
+                          <span><a href="/user/cart/decrement/<%= el['ProductId'] %>" class="btn btn-primary">-</a></span>
+                          <%= el['quantity'] %>
+                            <span><a href="/user/cart/increment/<%= el['ProductId'] %>"
+                                class="btn btn-primary">+</a></span>
+                        </p>
+                      </div>
+                      <%= rupiah(el['quantity'] * el['Product']['price']) %>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <% }) %>
+          </div>
+
+          <p>Total price: <%= rupiah(data.map(item=> item['quantity'] * item['Product']['price']).reduce((a, b) => a + b, 0)) %></p>
+          <a href="/user/cart/delete/<%= data[0]['UserId'] %>" class="btn btn-primary">Checkout</a>
+        </div>
+        <% } %>
+
+
+          <%- include('../_script') %>
+</body>
+
+</html>
