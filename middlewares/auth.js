@@ -7,7 +7,7 @@ function isAdmin(req, res, next) {
 }
 
 function isLogin(req, res, next) {
-  if (!req.session['userName']) {
+  if (!req.session['UserId']) {
     res.redirect('/login?error=Please login first!')
   } else {
     next()

@@ -24,11 +24,12 @@ class Login {
 
             const isValidPassword = bcryptjs.compareSync(password, user['password'])
             if (isValidPassword) {
-                req.session['userName'] = user['userName']
+                req.session['UserId'] = user['id'];
+                req.session['role'] = user['role'];
 
-                res.redirect('/user/products')
+                user['role'] === 'Buyer' ? res.redirect('/user/products') : res.redirect('/admin/products') 
             } else {
-                res.redirect(`/login?error=Invalid password`)
+                return res.redirect(`/login?error=Invalid password`)
             }
         } catch (err) {
             res.send(err)
@@ -94,7 +95,7 @@ class Login {
         }
     }
 
-    static async logout(req, res) {
+    static logout(req, res) {
         try {
             req.session.destroy((err) => {
                 if (err) {
