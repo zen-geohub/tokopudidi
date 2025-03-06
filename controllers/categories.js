@@ -16,7 +16,8 @@ class Categories {
 
     static async formAddCategory(req, res) {
         try{
-            res.render('admin/categories/formAddCategory')
+            let { errors } = req.query
+            res.render('admin/categories/formAddCategory', { errors })
         }catch(err) {
             console.log(err)
             res.send(err)
@@ -29,16 +30,23 @@ class Categories {
             await Category.create(req.body)
             res.redirect('/admin/categories')
         }catch(err) {
-            console.log(err)
-            res.send(err)
+            if (err.name === "SequelizeValidationError") {
+                err = err.errors.map((el) => {
+                    return el.message
+                })
+                res.redirect(`/admin/categories/add?errors=${err}`)
+            } else {
+                res.send(err)
+            }
         }
     }
 
     static async formEditCategory(req, res) {
         try{
+            let { errors } = req.query
             let { id } = req.params
             let data = await Category.findByPk(id)
-            res.render('admin/categories/formEditCategory', { data })
+            res.render('admin/categories/formEditCategory', { data, errors })
         }catch(err) {
             console.log(err)
             res.send(err)
@@ -46,8 +54,8 @@ class Categories {
     }
 
     static async editCategory(req, res) {
+        let { id } = req.params
         try{
-            let { id } = req.params
             await Category.update(
                 req.body,
                 {
@@ -61,8 +69,14 @@ class Categories {
 
             res.redirect(`/admin/categories?updated=${data.name}`)
         }catch(err) {
-            console.log(err)
-            res.send(err)
+            if (err.name === "SequelizeValidationError") {
+                err = err.errors.map((el) => {
+                    return el.message
+                })
+                res.redirect(`/admin/categories/edit/${id}?errors=${err}`)
+            } else {
+                res.send(err)
+            }
         }
     }
 

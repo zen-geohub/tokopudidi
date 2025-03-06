@@ -11,6 +11,10 @@
     <div class="container">
         <h2 style="display: flex; justify-content: center; margin-bottom: 10px;">Add Product</h2>
 
+        <% if (errors) { %>
+            <p style="color: red;"><%= errors %></p>
+        <% } %>
+
         <form action="/admin/products/add" method="post">
             <label>Product</label>
             <div style="margin: 10px 0px;">

@@ -12,15 +12,78 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Product.belongsTo(models.Category, { foreignKey: "CategoryId" })
-      Product.hasMany(models.UserProduct, { foreignKey: "ProductId"})
+      Product.hasMany(models.UserProduct, { foreignKey: "ProductId" })
     }
   }
   Product.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    image: DataTypes.STRING,
-    stock: DataTypes.INTEGER,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "name product is required"
+        },
+        notEmpty: {
+          msg: "name product is required"
+        },
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "description is required"
+        },
+        notEmpty: {
+          msg: "description is required"
+        },
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "price is required"
+        },
+        notEmpty: {
+          msg: "price is required"
+        },
+        min: {
+          args: [1000],
+          msg: "price must be at least 1000"
+        }
+      }
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "image is required"
+        },
+        notEmpty: {
+          msg: "image is required"
+        },
+      }
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "stock is required"
+        },
+        notEmpty: {
+          msg: "stock is required"
+        },
+        min: {
+          args: [0],
+          msg: "stock must be at least 0"
+        }
+      }
+    },
     CategoryId: DataTypes.INTEGER
   }, {
     sequelize,
