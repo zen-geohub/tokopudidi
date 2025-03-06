@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Product</title>
 </head>
 <body>
     <%- include('../_navbar') %>
@@ -15,7 +15,7 @@
             <p style="color: red;"><%= errors %></p>
         <% } %>
 
-        <form action="/admin/products/add" method="post">
+        <form action="/admin/products/add" enctype="multipart/form-data" method="post">
             <label>Product</label>
             <div style="margin: 10px 0px;">
                 <input name="name" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
@@ -33,7 +33,7 @@
 
             <label>Image</label>
             <div style="margin: 10px 0px;">
-                <input name="image" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                <input name="image" accept="image/*" type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <label>Stock</label>

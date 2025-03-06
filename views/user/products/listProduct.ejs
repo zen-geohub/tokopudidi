@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .col {
-            flex: 0 0 25%;
-            max-width: 25%;
-        }
-
         p {
             font-size: 14px;
         }
@@ -26,43 +21,38 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Toko Pudidi</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="/user/products">Home</a>
-                    <a class="nav-link" href="/user/cart">Cart</a>
-                    <a class="nav-link" href="/user/orders">History</a>
-                    <a class="nav-link" href="/user/profile">Profile</a>
-                </div>
-            </div>
-            <form class="d-flex align-items-center gap-2" role="search">
-                <select class="form-select" name="filter">
-                    <option value="">Category</option>
-                    <% categories.forEach((el) => { %>
-                        <option value="<%= el.id %>"><%= el.name %></option>
-                    <% }) %>
+    <%- include('../partials/_navbar') %>
+
+        <main class="p-4">
+            <form class="flex justify-center items-center gap-2 mb-4" role="search">
+                <select class="select" name="filter">
+                    <option value="">-- Category --</option>
+                    <% categories.forEach((el)=> { %>
+                        <option value="<%= el.id %>">
+                            <%= el.name %>
+                        </option>
+                        <% }) %>
                 </select>
 
-                <input name="name" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <label class="input">
+                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input type="search" placeholder="Search" />
+                </label>
 
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline btn-success" type="submit">Search</button>
             </form>
-        </div>
-    </nav>
 
-    <div class="container my-4">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <% products.forEach((el)=> { %>
-                <div class="col">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <% products.forEach((el)=> { %>
                     <a href="/user/products/<%= el.id %>" class="text-decoration-none text-dark">
-                        <div class="card">
-                            <img src="<%= el.image %>" class="card-img-top" alt="...">
+                        <div class="card shadow-xl">
+                            <figure><img src="<%= el.image %>"></figure>
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= el.name %>
@@ -73,12 +63,11 @@
                             </div>
                         </div>
                     </a>
-                </div>
-                <% }) %>
-        </div>
-    </div>
+                    <% }) %>
+            </div>
+        </main>
 
-    <%- include('../_script') %>
+        <%- include('../partials/_script') %>
 </body>
 
 </html>

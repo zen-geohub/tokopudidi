@@ -2,11 +2,12 @@ const express = require('express')
 const router = express.Router()
 const Products = require('../controllers/products')
 const Categories = require('../controllers/categories')
+const upload = require('../middlewares/multer')
 
 // products
 router.get('/products', Products.readProducts)
 router.get('/products/add', Products.formAddProduct)
-router.post('/products/add', Products.postAddProduct)
+router.post('/products/add', upload.single('image'), Products.postAddProduct)
 router.get('/products/empety', Products.readProductEmpety)
 router.get('/products/:id', Products.detailProduct)
 router.get('/products/edit/:id', Products.formEditProduct)

@@ -67,5 +67,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Profile',
   });
+
+  Profile.beforeCreate((input, option) => {
+    if (!input['imageUrl']) {
+      input['imageUrl'] = '/public/defaultPhoto.png'
+    }
+  })
   return Profile;
 };

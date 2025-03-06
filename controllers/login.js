@@ -14,9 +14,9 @@ class Login {
 
     static async postLogin(req, res) {
         try {
-            const { userName, password } = req.body
+            const { username, password } = req.body
 
-            const user = await User.findOne({ where: { userName: userName } })
+            const user = await User.findOne({ where: { username: username } })
 
             if (!user) {
                 return res.redirect(`/login?error=Invalid username`)
@@ -27,7 +27,7 @@ class Login {
                 req.session['UserId'] = user['id'];
                 req.session['role'] = user['role'];
 
-                user['role'] === 'Buyer' ? res.redirect('/user/products') : res.redirect('/admin/products') 
+                user['role'] === 'Buyer' ? res.redirect('/user/products') : res.redirect('/admin/products')
             } else {
                 return res.redirect(`/login?error=Invalid password`)
             }
@@ -49,41 +49,14 @@ class Login {
     static async postRegister(req, res) {
         try {
             await User.create(req.body);
-            res.redirect(`/profile/register/${req.body['userName']}`);
+
+            const user = await User.findOne({ where: { username: req.body['username'] } })
+
+            req.session['UserId'] = user['id'];
+            req.session['role'] = user['role'];
+
+            res.redirect(`/user/profile/register`);
         } catch (err) {
-            if (err['name'] === 'SequelizeValidationError' || err['name'] === 'SequelizeUniqueConstraintError') {
-                const msg = err['errors'].map(el => el['message']);
-                const path = err['errors'].map(el => el['path']);
-
-                res.redirect(`/register?msg=${msg}&path=${path}`)
-            } else {
-                res.send(err)
-            }
-        }
-    }
-
-    static async showCreateProfile(req, res) {
-        try {
-            const { path, msg } = req.query;
-            const { userName } = req.params;
-
-            const user = await User.findOne({ where: { userName: userName } });
-
-            res.render('profile/registerProfile', { user, path, msg })
-        } catch (error) {
-            res.send(error)
-        }
-    }
-
-    static async createProfile(req, res) {
-        try {
-            const { userName } = req.params
-            const user = await User.findOne({ where: { userName: userName } })
-            req.body['UserId'] = user['id']
-
-            await Profile.create(req.body)
-            res.redirect('/login')
-        } catch (error) {
             if (err['name'] === 'SequelizeValidationError' || err['name'] === 'SequelizeUniqueConstraintError') {
                 const msg = err['errors'].map(el => el['message']);
                 const path = err['errors'].map(el => el['path']);

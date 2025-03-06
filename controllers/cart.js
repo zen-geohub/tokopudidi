@@ -15,8 +15,8 @@ class Cart {
                 },
                 include: Product,
                 attributes: ['UserId', 'ProductId', 'quantity', 'status'],
+                order: [['ProductId', 'asc']]
             })
-            console.log(data)
 
             res.render('user/cart/cart', { data, rupiah })
         } catch (err) {
@@ -68,7 +68,7 @@ class Cart {
         try {
             const { id } = req.params
 
-            await UserProduct.increment({ quantity: -1 }, { where: { ProductId: +id, } })
+            await UserProduct.increment({ quantity: -1 }, { where: { ProductId: +id } })
             res.redirect('/user/cart')
         } catch (error) {
             res.send(error)
@@ -78,6 +78,12 @@ class Cart {
     static async deleteCart(req, res) {
         try {
             const { id } = req.params
+            const userCartItems = await UserProduct.findAll({ where: { UserId: +id } })
+
+            for (const item of userCartItems) {
+                await Product.increment({ stock: -item['quantity'] }, { where: { id: item['ProductId'] } });
+            }
+
             await UserProduct.update({ quantity: 0, status: 'Paid' }, { where: { UserId: +id } })
             res.redirect('/user/cart')
         } catch (err) {

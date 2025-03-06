@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <%- include('../_navbar') %> -->
+  <%- include('../partials/_navbar') %>
+
+  <main class="flex flex-col items-center justify-center gap-2 p-2">
+    <h1 class="text-center text-2xl font-bold mb-4">User Profile</h1>
+
+    <img class="w-48 h-48 rounded-full object-cover" src="<%= data['imageUrl'] %>" alt="">
+    <table class="table-auto ">
+      <tr>
+        <td class="font-bold pr-4">Name</td>
+        <td>: <%= data['name'] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-bold pr-4">Address</td>
+        <td>: <%= data['address'] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-bold pr-4">Phonenumber</td>
+        <td>: <%= data['phoneNumber'] %>
+        </td>
+      </tr>
+    </table>
+
+    <a href="/user/profile/update" class="btn btn-primary">Update Profile</a>
+  </main>
+
+  <%- include('../partials/_script') %>
+</body>
+
+</html>

@@ -6,11 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart</title>
   <style>
-    .col {
-      flex: 0 0 25%;
-      max-width: 25%;
-    }
-
     p {
       font-size: 14px;
     }
@@ -26,48 +21,58 @@
 </head>
 
 <body>
-  <%- include('../_navbar') %>
+  <%- include('../partials/_navbar') %>
 
     <% if (data.length===0) { %>
       <div style="height: 100dvh; width: 100dvw; display: flex; justify-content: center; align-items: center;">
         <h1 style="text-align: center;"><span style="font-size: 8rem;">&#128722;</span><br />Cart is Empty</h1>
       </div>
       <% } else { %>
-        <div class="container my-4">
-          <div class="row row-cols-1 row-cols-md-4 g-4">
+        <main class="p-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <% data.forEach((el)=> { %>
-              <div class="col">
-                <a href="/user/products/" class="text-decoration-none text-dark">
-                  <div class="card">
-                    <img src="<%= el['Product']['image'] %>" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        <%= el['Product']['name'] %>
-                      </h5>
-                      <div>
-                        <p>
-                          Quantity:
-                          <span><a href="/user/cart/decrement/<%= el['ProductId'] %>" class="btn btn-primary">-</a></span>
-                          <%= el['quantity'] %>
-                            <span><a href="/user/cart/increment/<%= el['ProductId'] %>"
-                                class="btn btn-primary">+</a></span>
-                        </p>
-                      </div>
-                      <%= rupiah(el['quantity'] * el['Product']['price']) %>
+              <div class="card bg-base-100 shadow-md">
+                <a href="/user/products/" class="text-dark no-underline">
+                  <figure>
+                    <img src="<%= el['Product']['image'] %>" class="w-full h-48 object-cover rounded-t-lg"
+                      alt="Product Image">
+                  </figure>
+                  <div class="card-body">
+                    <h5 class="card-title text-lg font-bold">
+                      <%= el['Product']['name'] %>
+                    </h5>
+                    <div>
+                      <p>
+                        Quantity:
+                        <span>
+                          <a href="/user/cart/decrement/<%= el['ProductId'] %>" class="btn btn-secondary btn-sm">-</a>
+                        </span>
+                        <%= el['quantity'] %>
+                          <span>
+                            <a href="/user/cart/increment/<%= el['ProductId'] %>" class="btn btn-primary btn-sm">+</a>
+                          </span>
+                      </p>
                     </div>
+                    <p class="text-lg font-semibold">
+                      <%= rupiah(el['quantity'] * el['Product']['price']) %>
+                    </p>
                   </div>
                 </a>
               </div>
               <% }) %>
           </div>
 
-          <p>Total price: <%= rupiah(data.map(item=> item['quantity'] * item['Product']['price']).reduce((a, b) => a + b, 0)) %></p>
-          <a href="/user/cart/delete/<%= data[0]['UserId'] %>" class="btn btn-primary">Checkout</a>
-        </div>
+          <p class="text-xl font-bold mt-4">
+            Total price: <%= rupiah(data.map(item=> item['quantity'] * item['Product']['price']).reduce((a, b) => a + b,
+              0)) %>
+          </p>
+          <a href="/user/cart/delete/<%= data[0]['UserId'] %>" class="btn btn-success mt-2">Checkout</a>
+        </main>
+
         <% } %>
 
 
-          <%- include('../_script') %>
+          <%- include('../partials/_script') %>
 </body>
 
 </html>

@@ -35,7 +35,7 @@ class Products {
                     CategoryId: filter
                 }
             }
-            
+
             let categories = await Category.findAll()
             let products = await Product.findAll(option)
             res.render("admin/products/listProduct", { products, rupiah, deleted, categories })
@@ -70,6 +70,8 @@ class Products {
 
     static async postAddProduct(req, res) {
         try {
+            req.body['image'] = `/public/${req.file['filename']}`
+
             await Product.create(req.body)
             res.redirect('/admin/products')
         } catch (err) {
@@ -204,6 +206,16 @@ class Products {
         } catch (err) {
             console.log(err)
             res.send(err)
+        }
+    }
+
+    static async buyProduct(req, res) {
+        try {
+            const { id } = req.params
+            await Product.increment({ stock: -1 }, { where: { id: +id } })
+            res.redirect('/user/products')
+        } catch (error) {
+            res.send(error)
         }
     }
 }

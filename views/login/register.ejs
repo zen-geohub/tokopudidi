@@ -5,28 +5,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register Account</title>
+
+  <style>
+    body {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite alternate-reverse;
+      height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <main class="p-2">
-    <form action="/register" method="post">
-      <div class="mb-3"></div>
-        <label for="">Username</label>
-        <input type="text" class="input" name="userName">
-      </div>
-      
-      <div class="mb-3"></div>
-        <label for="">Password</label>
-        <input type="text" class="input" name="password">
-      </div>
+  <main class="flex justify-center items-center h-dvh">
+    <form action="/register" method="post" class="flex flex-col gap-2 p-4 bg-white rounded-xl">
+      <h1 class="text-center text-2xl font-bold mb-4">Register Account</h1>
 
-      <div class="mb-3"></div>
-        <label for="">Email</label>
-        <input type="text" class="input" name="email">
-      </div>
+      <label class="input floating-label">
+        <span>Username</span>
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </g>
+        </svg>
+        <input type="text" required placeholder="Username" name="username">
+        <% if (path) { %>
+          <% let index=path.split(",").findIndex((el)=> el === "username") %>
+            <p style="color: red;">
+              <%= msg.split(",")[index] %>
+            </p>
+            <% } %>
+      </label>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <label class="input floating-label">
+        <span>Password</span>
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+            <path
+              d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z">
+            </path>
+            <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          </g>
+        </svg>
+        <input type="text" required placeholder="Password" name="password">
+        <% if (path) { %>
+          <% let index=path.split(",").findIndex((el)=> el === "password") %>
+            <p style="color: red;">
+              <%= msg.split(",")[index] %>
+            </p>
+            <% } %>
+      </label>
+
+      <label class="input floating-label">
+        <span>Email</span>
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </g>
+        </svg>
+        <input type="email" required placeholder="Email" name="email">
+        <% if (path) { %>
+          <% let index=path.split(",").findIndex((el)=> el === "email") %>
+            <p style="color: red;">
+              <%= msg.split(",")[index] %>
+            </p>
+            <% } %>
+      </label>
+
+      <button type="submit" class="btn btn-primary mt-2">Submit</button>
 
     </form>
   </main>
