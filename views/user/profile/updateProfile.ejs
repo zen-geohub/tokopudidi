@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Account</title>
+</head>
+
+<body>
+  <%- include('../partials/_navbar') %>
+
+  <main class="flex justify-center items-center h-dvh">
+    <img class="w-48 h-48 rounded-full object-cover" src="<%= data['imageUrl'] %>" alt="">
+
+    <form action="/user/profile/update/" method="post" enctype="multipart/form-data" class="border flex flex-col gap-2 p-4 bg-white rounded-xl">
+      <h1 class="text-center text-2xl font-bold mb-4">User Profile</h1>
+
+      <div class="mb-3">
+        <label for="">Name</label><br>
+        <input type="text" class="input" value="<%= data['name'] %>" name="name">
+      </div>
+
+      <div class="mb-3">
+        <label for="">Profile Image</label>
+        <input type="file" accept="image/*" class="file-input" name="imageUrl">
+      </div>
+
+      <div class="mb-3">
+        <label for="">Address</label>
+        <textarea name="address" id="" class="textarea"><%= data['address'] %></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="">Phonenumber</label>
+        <input type="tel" class="input" value="<%= data['phoneNumber'] %>" name="phoneNumber">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </main>
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+
+</html>

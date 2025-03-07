@@ -44,6 +44,39 @@ class UserProfile {
       }
     }
   }
+
+  static async showUpdateProfile(req, res) {
+    try {
+      const { path, msg } = req.query;
+      const UserId = req.session['UserId']
+      const data = await Profile.findOne({ where: { UserId } })
+
+      res.render('user/profile/updateProfile', { data, path, msg })
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  static async updateProfile(req, res) {
+    try {
+      const UserId = req.session['UserId']
+      if (req.file) {
+        req.body['imageUrl'] = `/public/${req.file['filename']}`
+      }
+
+      await Profile.update(req.body, { where: { UserId } })
+      res.redirect('user/profile')
+    } catch (error) {
+      if (err['name'] === 'SequelizeValidationError' || err['name'] === 'SequelizeUniqueConstraintError') {
+        const msg = err['errors'].map(el => el['message']);
+        const path = err['errors'].map(el => el['path']);
+
+        res.redirect(`/register?msg=${msg}&path=${path}`)
+      } else {
+        res.send(err)
+      }
+    }
+  }
 }
 
 module.exports = UserProfile;

@@ -21,5 +21,7 @@ router.get('/cart/delete/:id', Cart.deleteCart)
 router.get('/profile', UserProfile.readProfile);
 router.get('/profile/register/', UserProfile.showCreateProfile);
 router.post('/profile/register/', upload.single('imageUrl'), UserProfile.createProfile);
+router.get('/profile/update/', UserProfile.showUpdateProfile);
+router.post('/profile/update/', upload.single('imageUrl'), UserProfile.updateProfile);
 
 module.exports = router

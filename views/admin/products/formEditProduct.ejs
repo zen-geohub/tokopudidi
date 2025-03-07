@@ -1,62 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Product</title>
 </head>
+
 <body>
-    <%- include('../_navbar') %>
+    <%- include('../partials/_navbar') %>
 
-    <div class="container">
-        <h2 style="display: flex; justify-content: center; margin-bottom: 10px;">Add Product</h2>
+        <div class="container p-4">
+            <h2 class="text-center text-2xl font-bold mb-3">Edit Product</h2>
 
-        <% if (errors) { %>
-            <p style="color: red;"><%= errors %></p>
-        <% } %>
+            <form action="/admin/products/edit/<%= product.id %>" method="post"
+                class="flex flex-col items-center border gap-2">
+                <div class="flex flex-col min-w-72 w-64">
+                    <label class="label">Product</label>
+                    <input name="name" value="<%= product.name %>" type="text" class="input">
+                    <% if (path) { %>
+                        <% let index=path.split(",").findIndex((el)=> el === "name") %>
+                            <p style="color: red;">
+                                <%= msg.split(",")[index] %>
+                            </p>
+                            <% } %>
+                </div>
 
-        <form action="/admin/products/edit/<%= product.id %>" method="post">
-            <label>Product</label>
-            <div style="margin: 10px 0px;">
-                <input name="name" value="<%= product.name %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <div class="flex flex-col min-w-72">
+                    <label>Description</label>
+                    <input name="description" value="<%= product.description %>" type="text" class="input">
+                    <% if (path) { %>
+                        <% let index=path.split(",").findIndex((el)=> el === "description") %>
+                            <p style="color: red;">
+                                <%= msg.split(",")[index] %>
+                            </p>
+                            <% } %>
+                </div>
 
-            <label>Description</label>
-            <div style="margin: 10px 0px;">
-                <input name="description" value="<%= product.description %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <div class="flex flex-col min-w-72">
+                    <label>Price</label>
+                    <input name="price" value="<%= product.price %>" type="number" class="input">
+                    <% if (path) { %>
+                        <% let index=path.split(",").findIndex((el)=> el === "price") %>
+                            <p style="color: red;">
+                                <%= msg.split(",")[index] %>
+                            </p>
+                            <% } %>
+                </div>
 
-            <label>Price</label>
-            <div style="margin: 10px 0px;">
-                <input name="price" value="<%= product.price %>" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <div class="flex flex-col min-w-72">
+                    <label>Image</label>
+                    <input name="image" value="<%= product.image %>" type="text" class="input">
+                    <% if (path) { %>
+                        <% let index=path.split(",").findIndex((el)=> el === "image") %>
+                            <p style="color: red;">
+                                <%= msg.split(",")[index] %>
+                            </p>
+                            <% } %>
+                </div>
 
-            <label>Image</label>
-            <div style="margin: 10px 0px;">
-                <input name="image" value="<%= product.image %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <div class="flex flex-col min-w-72">
+                    <label>Stock</label>
+                    <input name="stock" value="<%= product.stock %>" type="number" class="input">
+                    <% if (path) { %>
+                        <% let index=path.split(",").findIndex((el)=> el === "stock") %>
+                            <p style="color: red;">
+                                <%= msg.split(",")[index] %>
+                            </p>
+                            <% } %>
+                </div>
 
-            <label>Stock</label>
-            <div style="margin: 10px 0px;">
-                <input name="stock" value="<%= product.stock %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <div class="flex flex-col min-w-72">
+                    <label>Category</label>
+                    <select style="margin: 10px 0px;" name="CategoryId" class="select"
+                        aria-label="Default select example">
+                        <% categories.forEach((el)=> { %>
+                            <% if (el.id===product.CategoryId) { %>
+                                <option value="<%= el.id %>" selected>
+                                    <%= el.name %>
+                                </option>
+                                <% } else { %>
+                                    <option value="<%= el.id %>">
+                                        <%= el.name %>
+                                    </option>
+                                    <% } %>
+                                        <% }) %>
+                    </select>
+                    <% if (path) { %>
+                        <% let index=path.split(",").findIndex((el)=> el === "CategoryId") %>
+                            <p style="color: red;">
+                                <%= msg.split(",")[index] %>
+                            </p>
+                            <% } %>
+                </div>
 
-            <label>Category</label>
-            <select style="margin: 10px 0px;" name="CategoryId" class="form-select" aria-label="Default select example">
-                <% categories.forEach((el) => { %>
-                    <% if (el.id === product.CategoryId) { %>
-                        <option value="<%= el.id %>" selected><%= el.name %></option>
-                    <% } else { %>
-                        <option value="<%= el.id %>"><%= el.name %></option>
-                    <% } %>
-                <% }) %>
-              </select>
-            <div>
-                <button type="submit" value="submit" class="btn btn-primary">Update Product</button>
-            </div>
-        </form>
-    </div>
+                <div>
+                    <button type="submit" value="submit" class="btn btn-primary">Update Product</button>
+                </div>
+            </form>
+        </div>
 
-    <%- include('../_script') %>
+        <%- include('../partials/_script') %>
 </body>
+
 </html>

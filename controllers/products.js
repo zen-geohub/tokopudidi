@@ -48,8 +48,8 @@ class Products {
     static async detailProduct(req, res) {
         try {
             let { id } = req.params
-            let data = await Product.findByPk(id)
-            console.log(data)
+            let data = await Product.findProductById(id)
+            
             res.render('admin/products/detailProduct', { data, rupiah, timeSince })
         } catch (err) {
             console.log(err)
@@ -59,9 +59,9 @@ class Products {
 
     static async formAddProduct(req, res) {
         try {
-            let { errors } = req.query
+            let { path, msg } = req.query
             let data = await Category.findAll()
-            res.render('admin/products/formAddProduct', { data, errors })
+            res.render('admin/products/formAddProduct', { data, path, msg })
         } catch (err) {
             console.log(err)
             res.send(err)
@@ -70,29 +70,32 @@ class Products {
 
     static async postAddProduct(req, res) {
         try {
-            req.body['image'] = `/public/${req.file['filename']}`
+            if (req.file) {
+                req.body['image'] = `/public/${req.file['filename']}`
+            }
 
             await Product.create(req.body)
             res.redirect('/admin/products')
-        } catch (err) {
-            if (err.name === "SequelizeValidationError") {
-                err = err.errors.map((el) => {
-                    return el.message
-                })
-                res.redirect(`/admin/products/add?errors=${err}`)
+        } catch (error) {
+            if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
+                let msg = error.errors.map(el => el.message)
+                let path = error.errors.map(el => el.path)
+
+                res.redirect(`/admin/products/add?msg=${msg}&path=${path}`)
             } else {
-                res.send(err)
+                console.log(error)
+                res.send(error)
             }
         }
     }
 
     static async formEditProduct(req, res) {
         try {
-            let { errors } = req.query
+            let { path, msg } = req.query
             let { id } = req.params
             let categories = await Category.findAll()
             let product = await Product.findByPk(id)
-            res.render('admin/products/formEditProduct', { categories, product, errors })
+            res.render('admin/products/formEditProduct', { categories, product, path, msg })
         } catch (err) {
             console.log(err)
             res.send(err)
@@ -112,14 +115,14 @@ class Products {
             )
 
             res.redirect("/admin/products")
-        } catch (err) {
-            if (err.name === "SequelizeValidationError") {
-                err = err.errors.map((el) => {
-                    return el.message
-                })
-                res.redirect(`/admin/products/edit/${id}?errors=${err}`)
+        } catch (error) {
+            if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
+                let msg = error.errors.map(el => el.message)
+                let path = error.errors.map(el => el.path)
+
+                res.redirect(`/admin/products/edit/${id}?msg=${msg}&path=${path}`)
             } else {
-                res.send(err)
+                res.send(error)
             }
         }
     }
