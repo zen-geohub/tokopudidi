@@ -14,6 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Category, { foreignKey: "CategoryId" })
       Product.hasMany(models.UserProduct, { foreignKey: "ProductId" })
     }
+
+    static async findProductById(id) {
+      try {
+        const data = await Product.findByPk(id)
+
+        return data
+      } catch (error) {
+        throw error
+      }
+    }
   }
   Product.init({
     name: {

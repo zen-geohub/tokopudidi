@@ -8,48 +8,54 @@
 </head>
 
 <body>
-    <%- include('../_navbar') %>
+    <%- include('../partials/_navbar') %>
 
-        <div class="container">
-            <div style="margin: 20px 0px;">
-                <a href="/admin/categories/add" type="button" class="btn btn-primary">Add Category</a>
-            </div>
-            <% if (deleted) { %>
-                <div style="margin: 20px 0px; display: flex; justify-content: center;">
-                    <p style="color: red;">category "<b><%= deleted %></b>" deleted</p>
-                </div>
-            <% } %>
-            <% if (updated) { %>
-                <div style="margin: 20px 0px; display: flex; justify-content: center;">
-                    <p style="color: green;">category "<b><%= updated %></b>" updated</p>
-                </div>
-            <% } %>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Last Updated</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% data.forEach((el, index) => { %>
-                        <tr>
-                            <td><%= index + 1 %></td>
-                            <td><%= el.name %></td>
-                            <td><%= el.formatDate %></td>
-                            <td>
-                                <a href="/admin/categories/edit/<%= el.id %>" type="button" class="btn btn-success">Edit</a>
-                                <a href="/admin/categories/delete/<%= el.id %>" type="button" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+    <div class="p-4">
+        <div class="my-5">
+          <a href="/admin/categories/add" class="btn btn-primary">Add Category</a>
         </div>
+      
+        <% if (deleted) { %>
+          <div class="my-5 flex justify-center">
+            <p class="text-red-500">Category "<b><%= deleted %></b>" deleted</p>
+          </div>
+        <% } %>
+      
+        <% if (updated) { %>
+          <div class="my-5 flex justify-center">
+            <p class="text-green-500">Category "<b><%= updated %></b>" updated</p>
+          </div>
+        <% } %>
+      
+        <div class="overflow-x-auto">
+          <table class="table w-full border border-gray-300">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2 border">No</th>
+                <th class="p-2 border">Name</th>
+                <th class="p-2 border">Last Updated</th>
+                <th class="p-2 border">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% data.forEach((el, index) => { %>
+                <tr class="hover">
+                  <td class="p-2 border"><%= index + 1 %></td>
+                  <td class="p-2 border"><%= el.name %></td>
+                  <td class="p-2 border"><%= el.formatDate %></td>
+                  <td class="p-2 border space-x-2">
+                    <a href="/admin/categories/edit/<%= el.id %>" class="btn btn-success btn-sm">Edit</a>
+                    <a href="/admin/categories/delete/<%= el.id %>" class="btn btn-error btn-sm">Delete</a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
 
-        <%- include('../_script') %>
+        <%- include('../partials/_script') %>
 </body>
 
 </html>

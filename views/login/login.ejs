@@ -5,29 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+
+  <style>
+    body {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-  <main>
-    <form action="/login" method="post">
+  <main class="flex justify-center items-center h-dvh">
+    <form action="/login" method="post" class="flex flex-col gap-1 p-4 bg-white rounded-xl">
+      <h1 class="text-center relative text-2xl font-bold mb-4"><span class="absolute left-10 bottom-3 rotate-10">📺</span>Tokopudidi<span class="absolute right-10 top-3 -rotate-30">🎮</span></h1>
       <% if (error) { %>
-       <p style="color: red;"><%= error %></p>
-      <% } %>
+        <p style="color: red;">
+          <%= error %>
+        </p>
+        <% } %>
 
-      <div class="mb-3">
-        <label for="">Username</label>
-        <input type="text" name="userName" class="input">
-      </div>
-      
-      <div class="mb-3">
-        <label for="">Password</label>
-        <input type="password" name="password" class="input">
-      </div>
+          <label class="input floating-label mb-2">
+            <span>Username</span>
+            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></g></svg>
+            <input type="text" required placeholder="Username" name="username">
+          </label>
 
-      <a href="/register" class="btn btn-outline">Tidak punya akun? Daftar sekarang.</a>
+          <label class="input floating-label mb-3">
+            <span>Password</span>
+            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></g></svg>
+            <input type="password" required placeholder="Password" name="password">
+          </label>
 
-      <button class="btn btn-primary" type="submit">Login</button>
+          <a href="/register" class="btn btn-outline mt-1">Tidak punya akun? Daftar sekarang.</a>
+
+          <button class="btn btn-primary mt-1" type="submit">Login</button>
     </form>
   </main>
 

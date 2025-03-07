@@ -6,25 +6,30 @@
     <title>Document</title>
 </head>
 <body>
-    <%- include('../_navbar') %>
+    <%- include('../partials/_navbar') %>
 
-    <div class="container">
-        <form action="/admin/categories/edit/<%= data.id %>" method="post">
-            <h2 style="display: flex; justify-content: center;">Add Category</h2>
-            <% if (errors) { %>
-                <p style="color: red;"><%= errors %></p>
-            <% } %>
-            <p><b>CategoryId: </b> <%= data.id %></p>
-            <label>Category</label>
-            <div style="margin: 10px 0px;">
-                <input name="name" value="<%= data.name %>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <div style="margin: 10px 0px;">
-                <button type="submit" value="submit" class="btn btn-primary">Add Category</button>
-            </div>
+    <div class="p-4">
+        <form action="/admin/categories/edit/<%= data.id %>" method="post" class="card bg-base-100 shadow-md p-6">
+          <h2 class="text-center text-xl font-bold">Add Category</h2>
+      
+          <% if (errors) { %>
+            <p class="text-red-500 mt-2"><%= errors %></p>
+          <% } %>
+      
+          <p class="mt-2"><b>CategoryId:</b> <%= data.id %></p>
+      
+          <label class="label mt-4">
+            <span class="label-text">Category</span>
+          </label>
+          <input name="name" value="<%= data.name %>" type="text" class="input input-bordered w-full" aria-label="Category Name">
+      
+          <div class="mt-6">
+            <button type="submit" class="btn btn-primary w-full">Add Category</button>
+          </div>
         </form>
-    </div>
+      </div>
+      
 
-    <%- include('../_script') %>
+    <%- include('../partials/_script') %>
 </body>
 </html>
